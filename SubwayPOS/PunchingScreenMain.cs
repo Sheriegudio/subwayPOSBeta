@@ -10,9 +10,16 @@ namespace SubwayPOS
 {
     public partial class PunchingScreenMain : Form
     {
-        public PunchingScreenMain()
+        public PunchingScreenMain(int userId, string userName)
         {
             InitializeComponent();
+
         }
+        private void PunchingScreenMain_Load(object sender, EventArgs e)
+        { 
+        
+        }
+
+
     }
 }

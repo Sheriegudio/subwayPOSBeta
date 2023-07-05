@@ -57,7 +57,9 @@ namespace SubwayPOS
 
                 if (reader.Read())
                 {
-                    MessageBox.Show("Success");
+                    PunchingScreenMain punchScreenMain = new PunchingScreenMain(3, "shdh");
+                    punchScreenMain.Show();
+
 
                 }
                 else
