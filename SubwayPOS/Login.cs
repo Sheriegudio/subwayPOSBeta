@@ -57,10 +57,9 @@ namespace SubwayPOS
 
                 if (reader.Read())
                 {
-                    PunchingScreenMain punchScreenMain = new PunchingScreenMain(3, "shdh");
+                    PunchingScreenMain punchScreenMain = new PunchingScreenMain(int.Parse(reader["USERID"].ToString()), reader["USERNAME"].ToString());
                     punchScreenMain.Show();
-
-
+                    Hide();
                 }
                 else
                 {
