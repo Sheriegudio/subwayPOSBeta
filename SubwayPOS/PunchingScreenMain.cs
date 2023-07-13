@@ -5,12 +5,12 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Header;
 
 namespace SubwayPOS
 {
     public partial class PunchingScreenMain : Form
     {
-        public ListBox itemsOftheBill;
 
         public int userID;
         public string userName;
@@ -31,6 +31,7 @@ namespace SubwayPOS
 
         public string itemSize;
         public int itemCounter;
+        public List<Item> itemList;
         public string wholeOrder;
         public PunchingScreenMain(int currentUserId, string currentUserName)
         {
@@ -40,7 +41,8 @@ namespace SubwayPOS
             totalBillAmount = 0.0m;
             main = 0.0m;
             type = 0.0m;
-            itemsOftheBill = new ListBox();
+            itemList = new List<Item>();
+            itemCounter = 1;
         }
         private void lbl_userName_Click(object sender, EventArgs e)
         {
@@ -51,6 +53,7 @@ namespace SubwayPOS
         {
             lbl_userName.Text = userName;
             gb_type.Enabled = false;
+            btn_remove.Enabled = false;
         }
 
         private void btn_10oz_Click(object sender, EventArgs e)
@@ -58,24 +61,27 @@ namespace SubwayPOS
             totalBillAmount += 2.59m;
             updateSubtotal(totalBillAmount);
             Item orderItem = new Item(2.59m, "", "10 Oz drink");
-            itemsOftheBill.Items.Add(orderItem);
-            displayItems(itemsOftheBill);
+            itemCounter++;
+            itemList.Add(orderItem);
+            displayItems(itemList);
         }
         private void btn_20oz_Click(object sender, EventArgs e)
         {
             totalBillAmount += 3.00m;
             updateSubtotal(totalBillAmount);
             Item orderItem = new Item(3.00m, "", "20 Oz drink");
-            itemsOftheBill.Items.Add(orderItem);
-            displayItems(itemsOftheBill);
+            itemCounter++;
+            itemList.Add(orderItem);
+            displayItems(itemList);
         }
         private void btn_30oz_Click(object sender, EventArgs e)
         {
             totalBillAmount += 3.30m;
             updateSubtotal(totalBillAmount);
             Item orderItem = new Item(3.30m, "", "30 Oz drink");
-            itemsOftheBill.Items.Add(orderItem);
-            displayItems(itemsOftheBill);
+            itemCounter++;
+            itemList.Add(orderItem);
+            displayItems(itemList);
         }
 
         private void btn_water_Click(object sender, EventArgs e)
@@ -83,8 +89,9 @@ namespace SubwayPOS
             totalBillAmount += 3.30m;
             updateSubtotal(totalBillAmount);
             Item orderItem = new Item(3.30m, "", "Water bottle");
-            itemsOftheBill.Items.Add(orderItem);
-            displayItems(itemsOftheBill);
+            itemCounter++;
+            itemList.Add(orderItem);
+            displayItems(itemList);
         }
 
         private void btn_softDrink_Click(object sender, EventArgs e)
@@ -92,8 +99,9 @@ namespace SubwayPOS
             totalBillAmount += 3.30m;
             updateSubtotal(totalBillAmount);
             Item orderItem = new Item(3.30m, "", "Soft drink");
-            itemsOftheBill.Items.Add(orderItem);
-            displayItems(itemsOftheBill);
+            itemCounter++;
+            itemList.Add(orderItem);
+            displayItems(itemList);
         }
 
         private void btn_1cookie_Click(object sender, EventArgs e)
@@ -101,16 +109,18 @@ namespace SubwayPOS
             totalBillAmount += 1.05m;
             updateSubtotal(totalBillAmount);
             Item orderItem = new Item(1.05m, "", "Cookie");
-            itemsOftheBill.Items.Add(orderItem);
-            displayItems(itemsOftheBill);
+            itemCounter++;
+            itemList.Add(orderItem);
+            displayItems(itemList);
         }
         private void btn_3cookies_Click(object sender, EventArgs e)
         {
             totalBillAmount += 2.85m;
             updateSubtotal(totalBillAmount);
             Item orderItem = new Item(2.85m, "", "3 Cookies");
-            itemsOftheBill.Items.Add(orderItem);
-            displayItems(itemsOftheBill);
+            itemCounter++;
+            itemList.Add(orderItem);
+            displayItems(itemList);
         }
 
         private void btn_6cookies_Click(object sender, EventArgs e)
@@ -118,8 +128,9 @@ namespace SubwayPOS
             totalBillAmount += 5.50m;
             updateSubtotal(totalBillAmount);
             Item orderItem = new Item(5.50m, "", "6 Cookies");
-            itemsOftheBill.Items.Add(orderItem);
-            displayItems(itemsOftheBill);
+            itemCounter++;
+            itemList.Add(orderItem);
+            displayItems(itemList);
         }
 
         private void btn_total_Click(object sender, EventArgs e)
@@ -198,9 +209,11 @@ namespace SubwayPOS
             itemSize = checkSize();
             updateSubtotal(calculateTotalItemPrice());
             Item orderItem = new Item(itemSubTotal, itemSize, "Veggie Delight");
-            itemsOftheBill.Items.Add(orderItem);
-            displayItems(itemsOftheBill);
+            itemCounter++;
+            itemList.Add(orderItem);
+            displayItems(itemList);
             backtoMain();
+
 
         }
 
@@ -210,8 +223,9 @@ namespace SubwayPOS
             itemSize = checkSize();
             updateSubtotal(calculateTotalItemPrice());
             Item orderItem = new Item(itemSubTotal, itemSize, "Veggie Patty");
-            itemsOftheBill.Items.Add(orderItem);
-            displayItems(itemsOftheBill);
+            itemCounter++;
+            itemList.Add(orderItem);
+            displayItems(itemList);
             backtoMain();
 
         }
@@ -222,8 +236,9 @@ namespace SubwayPOS
             itemSize = checkSize();
             updateSubtotal(calculateTotalItemPrice());
             Item orderItem = new Item(itemSubTotal, itemSize, "Turky");
-            itemsOftheBill.Items.Add(orderItem);
-            displayItems(itemsOftheBill);
+            itemCounter++;
+            itemList.Add(orderItem);
+            displayItems(itemList);
             backtoMain();
 
         }
@@ -234,8 +249,9 @@ namespace SubwayPOS
             itemSize = checkSize();
             updateSubtotal(calculateTotalItemPrice());
             Item orderItem = new Item(itemSubTotal, itemSize, "Ham");
-            itemsOftheBill.Items.Add(orderItem);
-            displayItems(itemsOftheBill);
+            itemCounter++;
+            itemList.Add(orderItem);
+            displayItems(itemList);
             backtoMain();
 
         }
@@ -246,8 +262,9 @@ namespace SubwayPOS
             itemSize = checkSize();
             updateSubtotal(calculateTotalItemPrice());
             Item orderItem = new Item(itemSubTotal, itemSize, "Spicy Italian");
-            itemsOftheBill.Items.Add(orderItem);
-            displayItems(itemsOftheBill);
+            itemCounter++;
+            itemList.Add(orderItem);
+            displayItems(itemList);
             backtoMain();
         }
 
@@ -257,8 +274,9 @@ namespace SubwayPOS
             itemSize = checkSize();
             updateSubtotal(calculateTotalItemPrice());
             Item orderItem = new Item(itemSubTotal, itemSize, "Meatball");
-            itemsOftheBill.Items.Add(orderItem);
-            displayItems(itemsOftheBill);
+            itemCounter++;
+            itemList.Add(orderItem);
+            displayItems(itemList);
             backtoMain();
 
         }
@@ -269,8 +287,9 @@ namespace SubwayPOS
             itemSize = checkSize();
             updateSubtotal(calculateTotalItemPrice());
             Item orderItem = new Item(itemSubTotal, itemSize, "Steak");
-            itemsOftheBill.Items.Add(orderItem);
-            displayItems(itemsOftheBill);
+            itemCounter++;
+            itemList.Add(orderItem);
+            displayItems(itemList);
             backtoMain();
 
         }
@@ -281,8 +300,9 @@ namespace SubwayPOS
             itemSize = checkSize();
             updateSubtotal(calculateTotalItemPrice());
             Item orderItem = new Item(itemSubTotal, itemSize, "Grill Chicken");
-            itemsOftheBill.Items.Add(orderItem);
-            displayItems(itemsOftheBill);
+            itemCounter++;
+            itemList.Add(orderItem);
+            displayItems(itemList);
             backtoMain();
 
         }
@@ -293,8 +313,9 @@ namespace SubwayPOS
             itemSize = checkSize();
             updateSubtotal(calculateTotalItemPrice());
             Item orderItem = new Item(itemSubTotal, itemSize, "Tuna");
-            itemsOftheBill.Items.Add(orderItem);
-            displayItems(itemsOftheBill);
+            itemCounter++;
+            itemList.Add(orderItem);
+            displayItems(itemList);
             backtoMain();
 
         }
@@ -305,8 +326,9 @@ namespace SubwayPOS
             itemSize = checkSize();
             updateSubtotal(calculateTotalItemPrice());
             Item orderItem = new Item(itemSubTotal, itemSize, "Cold Cut");
-            itemsOftheBill.Items.Add(orderItem);
-            displayItems(itemsOftheBill);
+            itemCounter++;
+            itemList.Add(orderItem);
+            displayItems(itemList);
             backtoMain();
 
         }
@@ -317,8 +339,9 @@ namespace SubwayPOS
             itemSize = checkSize();
             updateSubtotal(calculateTotalItemPrice());
             Item orderItem = new Item(itemSubTotal, itemSize, "Chicken Teriyaki");
-            itemsOftheBill.Items.Add(orderItem);
-            displayItems(itemsOftheBill);
+            itemCounter++;
+            itemList.Add(orderItem);
+            displayItems(itemList);
             backtoMain();
 
         }
@@ -329,8 +352,9 @@ namespace SubwayPOS
             itemSize = checkSize();
             updateSubtotal(calculateTotalItemPrice());
             Item orderItem = new Item(itemSubTotal, itemSize, "B.L.T");
-            itemsOftheBill.Items.Add(orderItem);
-            displayItems(itemsOftheBill);
+            itemCounter++;
+            itemList.Add(orderItem);
+            displayItems(itemList);
             backtoMain();
         }
 
@@ -412,16 +436,34 @@ namespace SubwayPOS
             clearRadioCheck();
             return "";
         }
-        private void displayItems(ListBox lstBX)
+
+        public void displayItems(List<Item> listOfItems)
         {
-            wholeOrder = "";
-            itemCounter = 1;
-            foreach (Item orderItem in lstBX.Items)
+            lstbx_orderItems.Items.Clear();
+            for (int i = 0; i < listOfItems.Count; i++)
             {
-                wholeOrder += "#"+itemCounter.ToString() +". " +orderItem.itemDescription + "\n";
-                itemCounter++;
+                Item item = listOfItems[i];
+                if (item != null)
+                {
+                    string displayText = $"#{i + 1} {item.itemDescription}";
+                    lstbx_orderItems.Items.Add(displayText);
+                }
             }
-            richtx_Orderitems.Text = wholeOrder;
+        }
+
+        private void lstbx_orderItems_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            btn_remove.Enabled = true;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            int selectedIndex = lstbx_orderItems.SelectedIndex;
+            totalBillAmount -= itemList[selectedIndex].itemPrice;
+            itemList.RemoveAt(selectedIndex);
+            updateSubtotal(totalBillAmount);
+            displayItems(itemList);
+            btn_remove.Enabled = false;
         }
     }
 }

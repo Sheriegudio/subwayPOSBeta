@@ -42,18 +42,8 @@ namespace SubwayPOS
                 int passWord;
                 passWord = int.TryParse(txt_password.Text, out passWord) ? int.Parse(txt_password.Text) : throw new FormatException("passWord");
 
+                SqlDataReader reader = Model.authenticateUser(userId, passWord);
 
-                //QUERY TO AUTHENTICATE USER
-                string authenticationQurery = "SELECT USERID, USERNAME, PASSWORD FROM USERS " +
-                    "WHERE USERID = @ID AND PASSWORD = @PASSWORD";
-
-                SqlConnection con = new SqlConnection(connectionString);
-                con.Open();
-
-                SqlCommand cmd = new SqlCommand(authenticationQurery, con);
-                cmd.Parameters.AddWithValue("ID", userId);
-                cmd.Parameters.AddWithValue("PASSWORD", passWord);
-                SqlDataReader reader = cmd.ExecuteReader();
 
                 if (reader.Read())
                 {
@@ -67,8 +57,6 @@ namespace SubwayPOS
                     txt_password.Text = "";
                     MessageBox.Show("Incorrect User Id or Password.", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-                con.Close();
-
             }
             catch (System.FormatException ex)
             {
@@ -84,6 +72,10 @@ namespace SubwayPOS
                     txt_userId.Focus();
                     MessageBox.Show("Please enter valid numeric value for Password.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message + ex.GetType());
             }
         }
     }

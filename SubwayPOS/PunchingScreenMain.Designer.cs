@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PunchingScreenMain));
             lbl_userName = new System.Windows.Forms.Label();
             lbl_orderItems = new System.Windows.Forms.Label();
-            richtx_Orderitems = new System.Windows.Forms.RichTextBox();
             gb_drinks = new System.Windows.Forms.GroupBox();
             btn_water = new System.Windows.Forms.Button();
             btn_10oz = new System.Windows.Forms.Button();
@@ -66,6 +65,8 @@
             rb_12inFlatBread = new System.Windows.Forms.RadioButton();
             rb_6inBread = new System.Windows.Forms.RadioButton();
             rb_12inBread = new System.Windows.Forms.RadioButton();
+            lstbx_orderItems = new System.Windows.Forms.ListBox();
+            btn_remove = new System.Windows.Forms.Button();
             gb_drinks.SuspendLayout();
             gb_cookies.SuspendLayout();
             gb_type.SuspendLayout();
@@ -94,19 +95,6 @@
             lbl_orderItems.TabIndex = 1;
             lbl_orderItems.Text = "Order Items";
             // 
-            // richtx_Orderitems
-            // 
-            richtx_Orderitems.BackColor = System.Drawing.SystemColors.Info;
-            richtx_Orderitems.Enabled = false;
-            richtx_Orderitems.Font = new System.Drawing.Font("Calibri", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            richtx_Orderitems.ForeColor = System.Drawing.SystemColors.WindowText;
-            richtx_Orderitems.Location = new System.Drawing.Point(12, 62);
-            richtx_Orderitems.Name = "richtx_Orderitems";
-            richtx_Orderitems.ReadOnly = true;
-            richtx_Orderitems.Size = new System.Drawing.Size(179, 229);
-            richtx_Orderitems.TabIndex = 2;
-            richtx_Orderitems.Text = "";
-            // 
             // gb_drinks
             // 
             gb_drinks.Controls.Add(btn_water);
@@ -115,7 +103,7 @@
             gb_drinks.Controls.Add(btn_30oz);
             gb_drinks.Controls.Add(btn_softDrink);
             gb_drinks.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            gb_drinks.Location = new System.Drawing.Point(217, 30);
+            gb_drinks.Location = new System.Drawing.Point(300, 30);
             gb_drinks.Name = "gb_drinks";
             gb_drinks.Size = new System.Drawing.Size(118, 261);
             gb_drinks.TabIndex = 3;
@@ -188,7 +176,7 @@
             gb_cookies.Controls.Add(btn_3cookies);
             gb_cookies.Controls.Add(btn_6cookies);
             gb_cookies.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            gb_cookies.Location = new System.Drawing.Point(358, 30);
+            gb_cookies.Location = new System.Drawing.Point(447, 30);
             gb_cookies.Name = "gb_cookies";
             gb_cookies.Size = new System.Drawing.Size(118, 186);
             gb_cookies.TabIndex = 4;
@@ -246,7 +234,7 @@
             gb_type.Controls.Add(btn_turky);
             gb_type.Controls.Add(btn_spcyItalian);
             gb_type.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            gb_type.Location = new System.Drawing.Point(499, 30);
+            gb_type.Location = new System.Drawing.Point(592, 30);
             gb_type.Name = "gb_type";
             gb_type.Size = new System.Drawing.Size(259, 305);
             gb_type.TabIndex = 19;
@@ -414,7 +402,7 @@
             btn_total.BackColor = System.Drawing.SystemColors.InfoText;
             btn_total.Cursor = System.Windows.Forms.Cursors.Hand;
             btn_total.ForeColor = System.Drawing.SystemColors.HighlightText;
-            btn_total.Location = new System.Drawing.Point(217, 298);
+            btn_total.Location = new System.Drawing.Point(216, 308);
             btn_total.Name = "btn_total";
             btn_total.Size = new System.Drawing.Size(105, 49);
             btn_total.TabIndex = 17;
@@ -426,7 +414,7 @@
             // 
             lbl_subTotal.AutoSize = true;
             lbl_subTotal.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            lbl_subTotal.Location = new System.Drawing.Point(12, 308);
+            lbl_subTotal.Location = new System.Drawing.Point(12, 318);
             lbl_subTotal.Name = "lbl_subTotal";
             lbl_subTotal.Size = new System.Drawing.Size(133, 29);
             lbl_subTotal.TabIndex = 18;
@@ -443,7 +431,7 @@
             gb_Main.Controls.Add(rb_6inBread);
             gb_Main.Controls.Add(rb_12inBread);
             gb_Main.Font = new System.Drawing.Font("Calibri", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            gb_Main.Location = new System.Drawing.Point(784, 30);
+            gb_Main.Location = new System.Drawing.Point(880, 30);
             gb_Main.Name = "gb_Main";
             gb_Main.Size = new System.Drawing.Size(118, 384);
             gb_Main.TabIndex = 20;
@@ -582,19 +570,46 @@
             rb_12inBread.UseVisualStyleBackColor = false;
             rb_12inBread.CheckedChanged += rb_12inBread_CheckedChanged;
             // 
+            // lstbx_orderItems
+            // 
+            lstbx_orderItems.BackColor = System.Drawing.SystemColors.MenuBar;
+            lstbx_orderItems.Font = new System.Drawing.Font("Calibri", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            lstbx_orderItems.FormattingEnabled = true;
+            lstbx_orderItems.ItemHeight = 14;
+            lstbx_orderItems.Location = new System.Drawing.Point(12, 62);
+            lstbx_orderItems.Name = "lstbx_orderItems";
+            lstbx_orderItems.Size = new System.Drawing.Size(265, 214);
+            lstbx_orderItems.TabIndex = 8;
+            lstbx_orderItems.TabStop = false;
+            lstbx_orderItems.SelectedIndexChanged += lstbx_orderItems_SelectedIndexChanged;
+            // 
+            // btn_remove
+            // 
+            btn_remove.BackColor = System.Drawing.Color.Red;
+            btn_remove.Font = new System.Drawing.Font("Calibri", 12.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            btn_remove.ForeColor = System.Drawing.SystemColors.HighlightText;
+            btn_remove.Location = new System.Drawing.Point(12, 286);
+            btn_remove.Name = "btn_remove";
+            btn_remove.Size = new System.Drawing.Size(85, 29);
+            btn_remove.TabIndex = 21;
+            btn_remove.Text = "Remove";
+            btn_remove.UseVisualStyleBackColor = false;
+            btn_remove.Click += button1_Click;
+            // 
             // PunchingScreenMain
             // 
             AutoScaleDimensions = new System.Drawing.SizeF(12F, 29F);
             AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             BackColor = System.Drawing.SystemColors.Control;
-            ClientSize = new System.Drawing.Size(916, 425);
+            ClientSize = new System.Drawing.Size(1020, 425);
+            Controls.Add(btn_remove);
+            Controls.Add(lstbx_orderItems);
             Controls.Add(gb_Main);
             Controls.Add(gb_type);
             Controls.Add(lbl_subTotal);
             Controls.Add(btn_total);
             Controls.Add(gb_cookies);
             Controls.Add(gb_drinks);
-            Controls.Add(richtx_Orderitems);
             Controls.Add(lbl_orderItems);
             Controls.Add(lbl_userName);
             Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
@@ -616,7 +631,6 @@
 
         private System.Windows.Forms.Label lbl_userName;
         private System.Windows.Forms.Label lbl_orderItems;
-        private System.Windows.Forms.RichTextBox richtx_Orderitems;
         private System.Windows.Forms.GroupBox gb_drinks;
         private System.Windows.Forms.Button btn_softDrink;
         private System.Windows.Forms.Button btn_water;
@@ -651,5 +665,7 @@
         private System.Windows.Forms.RadioButton rb_riceWrap;
         private System.Windows.Forms.RadioButton rb_riceBowl;
         private System.Windows.Forms.RadioButton rb_salad;
+        private System.Windows.Forms.ListBox lstbx_orderItems;
+        private System.Windows.Forms.Button btn_remove;
     }
 }
